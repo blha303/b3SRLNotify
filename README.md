@@ -11,3 +11,13 @@ Example message:
     <b3Notify> Race initiated for Donkey Kong 64. Join #srl-9gcbs to participate.
                http://speedrun.tv/?race=9gcbs
 
+Setup:
+------
+
+If you want to run a clone of b3SRLNotify:
+
+* fork this repository
+* `virtualenv venv`
+* `venv/bin/pip install -r requirements.txt`
+* edit config.yml and games.yml
+* `venv/bin/python run.py`

@@ -3,7 +3,6 @@ import yaml
 from twisted.internet import reactor, task, defer, protocol
 from twisted.python import log
 from twisted.words.protocols import irc
-from twisted.web.client import getPage
 from twisted.application import internet, service
 
 with open('config.yml') as f:
@@ -63,7 +62,7 @@ class b3NotifyProtocol(irc.IRCClient):
  
 class b3NotifyFactory(protocol.ReconnectingClientFactory):
     protocol = b3NotifyProtocol
-    channels = ['#b3Notify', '#speedrunslive']
+    channels = config['channels']
  
 if __name__ == '__main__':
     reactor.connectTCP(HOST, PORT, b3NotifyFactory())
