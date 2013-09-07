@@ -1,6 +1,6 @@
 host: irc.speedrunslive.com
 port: 6667
-nick: b3Notify
+nick: b3NotifyTest
 user: blha303
 version: [b3SRLNotify, v1.5]
 real: A bot by blha303

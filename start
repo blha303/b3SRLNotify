@@ -1,2 +1,2 @@
 #!/bin/bash
-twistd -y run.py
+venv/bin/twistd -y run.py

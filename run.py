@@ -5,12 +5,12 @@ from twisted.python import log
 from twisted.words.protocols import irc
 from twisted.application import internet, service
 
-with open('config.yml') as f:
+with open('conf/config.yml') as f:
     config = yaml.load(f.read())
 HOST = config['host']
 PORT = config['port'] if config['port'] else 6667
 admins = config['admins']
-with open('games.yml') as f:
+with open('conf/games.yml') as f:
     games = yaml.load(f.read())
 
 class b3NotifyProtocol(irc.IRCClient):
