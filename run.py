@@ -74,3 +74,7 @@ if __name__ == '__main__':
     reactor.connectTCP(HOST, PORT, b3NotifyFactory())
     log.startLogging(stdout)
     reactor.run()
+elif __name__ == '__builtin__':
+    application = service.Application('b3Notify')
+    ircService = internet.TCPClient(HOST, PORT, b3NotifyFactory())
+    ircService.setServiceParent(application)
