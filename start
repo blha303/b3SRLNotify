@@ -1,1 +1,2 @@
+#!/bin/bash
 twistd -y run.py

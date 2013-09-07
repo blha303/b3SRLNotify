@@ -1,8 +1,0 @@
-"host": "irc.speedrunslive.com"
-"port": 6667
-"nick": "b3Notify"
-"user": "blha303"
-"version": ["b3SLNotify", "v1.5"]
-"real": "A bot by blha303"
-"source": "https://github.com/blha303/b3SRLNotify"
-"finger": "Bot by blha303, running on twisted. https://github.com/blha303/b3SRLNotify"

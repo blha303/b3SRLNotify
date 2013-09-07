@@ -1,14 +1,17 @@
-import sys, yaml
+from sys import stdout
+import yaml
 from twisted.internet import reactor, task, defer, protocol
 from twisted.python import log
 from twisted.words.protocols import irc
 from twisted.web.client import getPage
 from twisted.application import internet, service
-with open('config') as f:
+
+with open('config.yml') as f:
     config = yaml.load(f.read())
 HOST = config['host']
 PORT = config['port'] if config['port'] else 6667
-with open('games') as f:
+admins = config['admins']
+with open('games.yml') as f:
     games = yaml.load(f.read())
 
 class b3NotifyProtocol(irc.IRCClient):
@@ -64,7 +67,7 @@ class b3NotifyFactory(protocol.ReconnectingClientFactory):
  
 if __name__ == '__main__':
     reactor.connectTCP(HOST, PORT, b3NotifyFactory())
-    log.startLogging(sys.stdout)
+    log.startLogging(stdout)
     reactor.run()
  
 elif __name__ == '__builtin__':
