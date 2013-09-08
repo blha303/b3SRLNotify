@@ -41,7 +41,7 @@ class b3NotifyProtocol(irc.IRCClient):
     def privmsg(self, user, channel, message):
         nick, _, host = user.partition('!')
         message = message
-        if "!stv " in message:
+        if "!stv " in message and channel != "#speedrunslive":
             id = message.replace("!stv ", "")
             if len(id) == 5:
                 self._send_message("http://speedrun.tv/?race=" + id,
