@@ -80,8 +80,9 @@ class b3NotifyProtocol(irc.IRCClient):
               "Rematch initiated: " in message) and nick in ["RaceBot", "blha303"]:
             for game in games:
                 if game in message:
-                    self._send_message(message + " " + self.stv(message),
-                                       "#b3notify", nick=",".join(games[game]))
+                    for i in config["notificationchannels"]:
+                        self._send_message(message + " " + self.stv(message),
+                                           i, nick=",".join(games[game]))
 
     def _send_message(self, msg, target, nick=None):
         if nick:

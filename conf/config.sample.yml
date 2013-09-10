@@ -1,4 +1,4 @@
-host: irc.speedrunslive.com
+host: irc2.speedrunslive.com
 port: 6667
 nick: b3NotifyTest
 user: blha303
@@ -8,3 +8,4 @@ source: https://github.com/blha303/b3SRLNotify
 finger: Bot by blha303, running on twisted. https://github.com/blha303/b3SRLNotify
 admins: [blha303]
 channels: ["#b3Notify"]
+notificationchannels: ["#b3Notify"]
