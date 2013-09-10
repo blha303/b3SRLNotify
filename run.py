@@ -41,7 +41,34 @@ class b3NotifyProtocol(irc.IRCClient):
     def privmsg(self, user, channel, message):
         nick, _, host = user.partition('!')
         message = message
-        if "!stv " in message and channel != "#speedrunslive":
+        if "!delgame " in message and channel == "#b3Notify":
+            msg = message.replace("!delgame ", "").split(" ")
+            uuser = msg[0]
+            game = " ".join(msg[1:])
+            if game in games:
+                if uuser in games[game]:
+                    games[game].remove(uuser)
+                    if len(games[game]) == 0:
+                        del games[game]
+                    with open("conf/games.yml", "w") as file:
+                        file.write(yaml.dump(games))
+                    self._send_message("Done!", channel, nick=nick)
+                else:
+                    self._send_message("Specified user isn't in the notify list for that game :/", channel, nick=nick)
+            else:
+                self._send_message("Specified game has no triggers :/", channel, nick=nick)
+        elif "!addgame " in message and channel == "#b3Notify":
+            msg = message.replace("!addgame ", "").split(" ")
+            uuser = msg[0]
+            game = " ".join(msg[1:])
+            if game in games:
+                games[game].append(uuser)
+            else:
+                games[game] = [uuser]
+            with open("conf/games.yml", "w") as file:
+                file.write(yaml.dump(games))
+            self._send_message("Done!", channel, nick=nick)
+        elif "!stv " in message and channel != "#speedrunslive":
             id = message.replace("!stv ", "")
             if len(id) == 5:
                 self._send_message("http://speedrun.tv/?race=" + id,
@@ -50,12 +77,11 @@ class b3NotifyProtocol(irc.IRCClient):
                 self._send_message("http://speedrun.tv/?race=" +
                                    self.stv(message), channel, nick=nick)
         elif ("Race initiated for" in message or
-              "Rematch initiated: " in message) and nick in ["RaceBot"]:
+              "Rematch initiated: " in message) and nick in ["RaceBot", "blha303"]:
             for game in games:
                 if game in message:
-                    for name in games[game]:
-                        self._send_message(message + " " + self.stv(message),
-                                           "#b3notify", nick=name)
+                    self._send_message(message + " " + self.stv(message),
+                                       "#b3notify", nick=",".join(games[game]))
 
     def _send_message(self, msg, target, nick=None):
         if nick:
