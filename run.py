@@ -82,7 +82,7 @@ class b3NotifyProtocol(irc.IRCClient):
                 if game in message:
                     for i in config["notificationchannels"]:
                         self._send_message(message + " " + self.stv(message),
-                                           i, nick=",".join(games[game]))
+                                           i, nick=", ".join(games[game]))
 
     def _send_message(self, msg, target, nick=None):
         if nick:
